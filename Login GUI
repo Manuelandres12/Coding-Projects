@@ -1,0 +1,78 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+/*
+* @author Manuelandrés Lucena Morales
+* Swing GUI tutorial by Alex Lee. You can find it under GUI Login on his youtube channel 
+* 
+*/
+
+public class GUI  implements ActionListener
+{
+	private static JLabel userLabel;
+	private static JTextField userText;
+	private static JLabel passwordLabel;
+	private static JPasswordField passwordText;
+	private static JButton button;
+	private static JLabel success;
+	
+	public static void main(String[] args) 
+	{
+		JPanel panel = new JPanel(); // Creation of Panel
+		JFrame frame = new JFrame(); // Creation of Frame
+		frame.setSize(350, 200);	// Size of frame
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Proper way to close it
+		
+		frame.add(panel);	// Adding the panel to frame
+		
+		panel.setLayout(null);	
+		
+		userLabel = new JLabel("User"); // Creation of the User label
+		userLabel.setBounds(10, 20, 80, 25); // Setting the labels bounds. Written as X, Y, Width and Height
+		panel.add(userLabel); // Adding the label to the panel
+		
+		userText = new JTextField();	// Creation of a text field for user input
+		userText.setBounds(100, 20, 165, 25);	// The text fields bounds based on X, Y, Width and Height
+		panel.add(userText);	// Adding it to the panel
+		
+		passwordLabel = new JLabel("Password"); // Another label for the Password
+		passwordLabel.setBounds(10, 50, 80, 25);
+		panel.add(passwordLabel);
+		
+		passwordText = new JPasswordField();	// JPasswordField is used to hide the password with the dots.
+		passwordText.setBounds(100, 50, 165, 25);
+		panel.add(passwordText);
+		
+		button = new JButton("Login");	// Creation of a button for login
+		button.setBounds(10, 80, 80, 25);
+		button.addActionListener(new GUI());	// Used to check the GUI for correct user input
+		panel.add(button);
+		
+		success = new JLabel("");	// Success for if the fields match after pressing the button
+		success.setBounds(10, 110, 300, 50);
+		panel.add(success);
+		
+		
+		frame.setVisible(true);	// Displays the frame and its components (IE the panel)
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		String user = userText.getText();
+		@SuppressWarnings("deprecation")
+		String password = passwordText.getText();
+		System.out.println(user + ", " + password);
+		
+		if(user.equals("Manuelandres") && password.equals("lool")) // Condition for a successful login attempt
+		{
+			success.setText("Login Successful!"); // Display message for correct user input
+		}
+	}
+}
